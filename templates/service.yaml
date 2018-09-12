@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "generic-java-chart.fullname" . }}
+  labels:
+    app: {{ include "generic-java-chart.name" . }}
+    chart: {{ include "generic-java-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "generic-java-chart.name" . }}
+    release: {{ .Release.Name }}
