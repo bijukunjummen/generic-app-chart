@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "generic-java-chart.fullname" . }}
+  name: {{ include "app-chart.fullname" . }}
   labels:
-    app: {{ include "generic-java-chart.name" . }}
-    chart: {{ include "generic-java-chart.chart" . }}
+    app: {{ include "app-chart.name" . }}
+    chart: {{ include "app-chart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ include "generic-java-chart.name" . }}
+    app: {{ include "app-chart.name" . }}
     release: {{ .Release.Name }}

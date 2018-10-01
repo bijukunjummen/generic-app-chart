@@ -1,22 +1,22 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ include "generic-java-chart.fullname" . }}
+  name: {{ include "app-chart.fullname" . }}
   labels:
-    app: {{ include "generic-java-chart.name" . }}
-    chart: {{ include "generic-java-chart.chart" . }}
+    app: {{ include "app-chart.name" . }}
+    chart: {{ include "app-chart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "generic-java-chart.name" . }}
+      app: {{ include "app-chart.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "generic-java-chart.name" . }}
+        app: {{ include "app-chart.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -25,16 +25,22 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.app.containerPort }}
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.app.healthCheckPath }}
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.app.healthCheckPath }}
               port: http
+          env:
+          {{- range $key, $val := .Values.app.environment }}
+            - name: {{ $key }}
+              value: "{{ $val }}"
+          {{- end }}
+
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
