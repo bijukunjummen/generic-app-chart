@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  generic-app-chart:
+  - apiVersion: v1
+    created: 2018-10-28T07:13:49.465821-07:00
+    description: A generic Helm Chart for deploying an app image
+    digest: cea0abb4154f23d3e35ac268459f76c6d1f51b37151d357465b00eb3c4f5074d
+    name: generic-app-chart
+    urls:
+    - generic-app-chart-0.1.1.tgz
+    version: 0.1.1
+generated: 2018-10-28T07:13:49.465392-07:00
