@@ -13,6 +13,11 @@ app:
   healthCheckPath: /
   environment: {}
   secrets: {}
+  autoscaling:
+    enabled: false
+    maxReplicas: 2
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 40
 
 service:
   type: ClusterIP

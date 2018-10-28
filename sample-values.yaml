@@ -5,10 +5,19 @@ app:
     ENV_NAME: ENV_VALUE
   secrets:
     SECRET1: SECRET_VALUE1
+  autoscaling:
+    enabled: true
+    maxReplicas: 2
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 40    
+
+image:
+  repository: bijukunjummen/sample-backend-app
+  tag: 0.0.3-SNAPSHOT    
 
 ingress:
   enabled: true
-  path: /messages
+  path: /
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/affinity: "cookie"
