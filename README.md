@@ -4,7 +4,7 @@ A helm chart which helps with deploying a generic image to Kubernetes environmen
 
 ## Usage
 
-Consider a simple Java application for which I have a docker image available [here](https://hub.docker.com/r/bijukunjummen/sample-backend-app/) - https://hub.docker.com/r/bijukunjummen/sample-backend-app/. This is a simple Spring Boot applicaiton that exposes its endpoint at port 8082 by default. This helm chart will help with deploying/upgrading such an application in a Kubernetes environment with the following features:
+Consider a simple Java application for which I have a docker image available [here](https://hub.docker.com/r/bijukunjummen/sample-boot-knative-app/) - https://hub.docker.com/r/bijukunjummen/sample-boot-knative-app/. This is a simple Spring Boot applicaiton. This helm chart will help with deploying/upgrading such an application in a Kubernetes environment with the following features:
 
 1. It installs a deployment to manage the set of pods with a readiness probe and liveness probes 
 1. It installs a HPA to manage the scaling of pods based on load
@@ -28,7 +28,7 @@ app:
     targetCPUUtilizationPercentage: 40    
 
 image:
-  repository: bijukunjummen/sample-backend-app
+  repository: bijukunjummen/sample-boot-knative-app
   tag: 0.0.3-SNAPSHOT    
 
 ingress:
