@@ -36,3 +36,6 @@ ingress:
   enabled: true
   path: /
 ```
+
+and the helm installed the following way:
+
