@@ -106,3 +106,12 @@ NOTES:
   kubectl get --namespace default ing my-app-generic-app-chart
 
 ```
+
+
+**Upgrading App**
+
+The app can be upgraded by specifying changed values in `sample-values.yml` and running the following command:
+
+```sh
+helm upgrade my-app bk-charts/generic-app-chart -f sample-values.yaml
+```
