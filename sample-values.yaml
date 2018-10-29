@@ -12,7 +12,7 @@ app:
     targetCPUUtilizationPercentage: 40    
 
 image:
-  repository: bijukunjummen/sample-backend-app
+  repository: bijukunjummen/sample-boot-knative-app
   tag: 0.0.3-SNAPSHOT    
 
 ingress:
