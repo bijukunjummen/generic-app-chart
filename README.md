@@ -27,7 +27,6 @@ app:
     minReplicas: 1
     targetCPUUtilizationPercentage: 40    
 
-
 image:
   repository: bijukunjummen/sample-backend-app
   tag: 0.0.3-SNAPSHOT    
@@ -35,7 +34,75 @@ image:
 ingress:
   enabled: true
   path: /
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+
+resources:
+  constraints: 
+    enabled: true
+  requests:
+    cpu: 500m
 ```
 
 and the helm installed the following way:
 
+```sh
+helm repo add bk-charts http://bijukunjummen.github.io/generic-app-chart
+helm repo update
+
+# The chart should now show up in the search..
+helm search generic-app-chart
+
+# NAME                            CHART VERSION   APP VERSION     DESCRIPTION                              
+# bk-charts/generic-app-chart     *****                           A generic Helm Chart for deploying an app
+```
+
+
+Fill in a `sample-values.yaml` file with content similar to one above.
+
+and install the application:
+
+```sh
+helm install bk-charts/generic-app-chart  --name my-app --values sample-values.yaml
+```
+
+An output along these lines should be expected:
+
+```
+NAME:   my-app
+LAST DEPLOYED: Sun Oct 28 20:45:28 2018
+NAMESPACE: default
+STATUS: DEPLOYED
+
+RESOURCES:
+==> v1/HorizontalPodAutoscaler
+NAME                      AGE
+my-app-generic-app-chart  1s
+
+==> v1/Pod(related)
+
+NAME                                       READY  STATUS   RESTARTS  AGE
+my-app-generic-app-chart-59c76c46c4-fqwvr  0/2    Pending  0         0s
+
+==> v1/Secret
+
+NAME                      AGE
+my-app-generic-app-chart  1s
+
+==> v1/Service
+my-app-generic-app-chart  1s
+
+==> v1/Deployment
+my-app-generic-app-chart  1s
+
+==> v1beta1/Ingress
+my-app-generic-app-chart  1s
+
+
+NOTES:
+1. Get the application URL by running these commands:
+  kubectl get --namespace default ing my-app-generic-app-chart
+
+```
