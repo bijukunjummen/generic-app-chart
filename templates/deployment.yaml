@@ -49,8 +49,8 @@ spec:
           {{- end }}
           resources:
           {{- if .Values.resources.constraints.enabled }}
-          limits:
-{{ toYaml .Values.resources.limits | indent 12 }}
-          requests:
-{{ toYaml .Values.resources.requests | indent 12 }}
+            limits:
+{{ toYaml .Values.resources.limits | indent 14 }}
+            requests:
+{{ toYaml .Values.resources.requests | indent 14 }}
           {{- end }}
